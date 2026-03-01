@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Products</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Organic Products</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="products">
+
+    <div class="product">
+      <h3>Organic Tomatoes</h3>
+      <p>₹40 / kg</p>
+      <button onclick="addToCart('Tomatoes',40)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <h3>Organic Spinach</h3>
+      <p>₹30 / bunch</p>
+      <button onclick="addToCart('Spinach',30)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <h3>Organic Rice</h3>
+      <p>₹80 / kg</p>
+      <button onclick="addToCart('Rice',80)">Add to Cart</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
