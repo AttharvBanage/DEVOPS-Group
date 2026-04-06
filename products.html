@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Products</title>
+  <title>Products - Farmer Store</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <h1>Organic Products</h1>
+<!-- HEADER -->
+<header class="header">
+  <h1>🥦 Organic Products</h1>
   <nav>
     <a href="index.html">Home</a>
     <a href="products.html">Products</a>
@@ -15,29 +16,57 @@
   </nav>
 </header>
 
-<div class="container">
-  <div class="products">
+<!-- PRODUCTS SECTION -->
+<section class="products">
+
+  <h2>Our Fresh Products</h2>
+
+  <div class="product-list">
 
     <div class="product">
-      <h3>Organic Tomatoes</h3>
+      <h3>🍅 Organic Tomatoes</h3>
       <p>₹40 / kg</p>
       <button onclick="addToCart('Tomatoes',40)">Add to Cart</button>
     </div>
 
     <div class="product">
-      <h3>Organic Spinach</h3>
+      <h3>🥬 Organic Spinach</h3>
       <p>₹30 / bunch</p>
       <button onclick="addToCart('Spinach',30)">Add to Cart</button>
     </div>
 
     <div class="product">
-      <h3>Organic Rice</h3>
+      <h3>🌾 Organic Rice</h3>
       <p>₹80 / kg</p>
       <button onclick="addToCart('Rice',80)">Add to Cart</button>
     </div>
 
+    <div class="product">
+      <h3>🥕 Organic Carrots</h3>
+      <p>₹50 / kg</p>
+      <button onclick="addToCart('Carrots',50)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <h3>🥔 Organic Potatoes</h3>
+      <p>₹35 / kg</p>
+      <button onclick="addToCart('Potatoes',35)">Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <h3>🍎 Organic Apples</h3>
+      <p>₹120 / kg</p>
+      <button onclick="addToCart('Apples',120)">Add to Cart</button>
+    </div>
+
   </div>
-</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 Farmer Store | DevOps Project</p>
+</footer>
 
 <script src="script.js"></script>
 

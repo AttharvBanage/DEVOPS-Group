@@ -1,19 +1,21 @@
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// ADD TO CART WITH QUANTITY
 function addToCart(name, price) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push({name, price});
+  let existingItem = cart.find(item => item.name === name);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({ name, price, quantity: 1 });
+  }
+
   localStorage.setItem("cart", JSON.stringify(cart));
   alert(name + " added to cart!");
 }
 
-function removeItem(index) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.splice(index, 1);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  displayCart();
-}
-
-function displayCart() {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// DISPLAY CART
+function loadCart() {
   let cartDiv = document.getElementById("cartItems");
   let totalDiv = document.getElementById("totalPrice");
 
@@ -22,18 +24,61 @@ function displayCart() {
   cartDiv.innerHTML = "";
   let total = 0;
 
-  cart.forEach((item, index) => {
-    total += item.price;
+  if (cart.length === 0) {
+    cartDiv.innerHTML = "<p>Your cart is empty</p>";
+    totalDiv.innerHTML = "";
+    return;
+  }
 
-    cartDiv.innerHTML += `
-      <div class="cart-item">
-        <span>${item.name} - ₹${item.price}</span>
-        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
-      </div>
+  cart.forEach((item, index) => {
+    let div = document.createElement("div");
+
+    div.innerHTML = `
+      ${item.name} - ₹${item.price} × ${item.quantity}
+      <button onclick="increaseQty(${index})">+</button>
+      <button onclick="decreaseQty(${index})">-</button>
+      <button onclick="removeItem(${index})">Remove</button>
     `;
+
+    cartDiv.appendChild(div);
+
+    total += item.price * item.quantity;
   });
 
-  totalDiv.innerText = "Total: ₹" + total;
+  totalDiv.innerHTML = "Total: ₹" + total;
 }
 
-window.onload = displayCart;
+// INCREASE
+function increaseQty(index) {
+  cart[index].quantity += 1;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+// DECREASE
+function decreaseQty(index) {
+  if (cart[index].quantity > 1) {
+    cart[index].quantity -= 1;
+  } else {
+    cart.splice(index, 1);
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+// REMOVE
+function removeItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  loadCart();
+}
+
+// CHECKOUT
+function checkout() {
+  alert("Order placed successfully!");
+  localStorage.removeItem("cart");
+  location.reload();
+}
+
+// LOAD ON PAGE
+window.onload = loadCart;

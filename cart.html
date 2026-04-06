@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cart</title>
+  <title>Cart - Farmer Store</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <h1>Your Cart</h1>
+<!-- HEADER -->
+<header class="header">
+  <h1>🛒 Your Cart</h1>
   <nav>
-    <a href="index.html">Home</a>
+      <a href="index.html">Home</a>
     <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
   </nav>
 </header>
 
-<div class="container">
+<!-- CART SECTION -->
+<section class="cart-section">
+
+  <h2>Your Selected Items</h2>
+
   <div class="cart-box">
     <div id="cartItems"></div>
     <div class="total" id="totalPrice"></div>
   </div>
-</div>
+
+  <!-- ACTION BUTTON -->
+  <div class="cart-actions">
+    <button onclick="checkout()">Proceed to Checkout</button>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 Farmer Store | DevOps Project</p>
+</footer>
 
 <script src="script.js"></script>
 
