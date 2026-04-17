@@ -3,16 +3,22 @@ pipeline {
 
     stages {
 
+        stage('Clone Code') {
+            steps {
+                git 'https://github.com/AttharvBanage/DEVOPDSA.git'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t farmer-app .'
+                sh 'docker build -t group-project-app .'
             }
         }
 
         stage('Run Container') {
             steps {
-                bat 'docker rm -f farmer-jenkins || echo done'
-                bat 'docker run -d -p 8096:80 --name farmer-jenkins farmer-app'
+                sh 'docker rm -f group-container || true'
+                sh 'docker run -d -p 5020:80 --name group-container group-project-app'
             }
         }
     }
