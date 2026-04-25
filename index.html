@@ -1,83 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-
-  <title>Farmer-to-Customer Organic Store - LIVE UPDATED </title>
-  <link rel="stylesheet" href="style.css">
+<title>Farmer Market</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <h1>Welcome to Our Organic Shop🌱</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="cart.html">Cart</a>
-  </nav>
+<header>
+    <h2>🌾 Farmer Market</h2>
+    <nav>
+        <a href="#">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
 </header>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section class="hero">
-  <h2>Fresh Organic Products Direct from Farmers</h2>
-  <p>Healthy, chemical-free food delivered straight to your doorstep.</p>
-  <button onclick="location.href='products.html'">Shop Now</button>
+    <div class="hero-content">
+        <h1>Fresh & Organic Food 🌿</h1>
+        <p>Directly from farmers to your home — healthy, pure & affordable</p>
+        <a href="products.html" class="btn">Shop Now</a>
+    </div>
 </section>
 
 <!-- FEATURES -->
 <section class="features">
-  <div class="card">
-    <h3>🌿 100% Organic</h3>
-    <p>All products are natural and chemical-free.</p>
-  </div>
+    <div class="feature-box">
+        <h3>🚜 Direct from Farmers</h3>
+        <p>No middleman, pure quality products</p>
+    </div>
 
-  <div class="card">
-    <h3>🚜 Direct from Farmers</h3>
-    <p>Support local farmers with fair pricing.</p>
-  </div>
+    <div class="feature-box">
+        <h3>🌱 100% Organic</h3>
+        <p>Healthy and chemical-free food</p>
+    </div>
 
-  <div class="card">
-    <h3>⚡ Fast Delivery</h3>
-    <p>Quick delivery to your home.</p>
-  </div>
+    <div class="feature-box">
+        <h3>🚚 Fast Delivery</h3>
+        <p>Quick delivery at your doorstep</p>
+    </div>
 </section>
 
-<!-- PRODUCTS PREVIEW -->
-<section class="products">
-  <h2>Popular Products</h2>
+<!-- FEATURED PRODUCTS -->
+<section>
+    <h2 class="title">🌟 Featured Products</h2>
 
-  <div class="product-list">
-    <div class="product">
-      <h4>Tomatoes 🍅</h4>
-      <p>Fresh farm tomatoes</p>
-    </div>
+    <div class="products">
 
-    <div class="product">
-      <h4>Spinach 🥬</h4>
-      <p>Healthy green vegetables</p>
-    </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce">
+            <h3>Fresh Apples</h3>
+            <p>₹120/kg</p>
+            <button onclick="addToCart('Apples',120)">Add to Cart</button>
+        </div>
 
-    <div class="product">
-      <h4>Carrots 🥕</h4>
-      <p>Rich in vitamins</p>
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL0MBZvjb3WCfx7YZEoCn3Rj32FzNpAHsdI7w0yuQRca6A6dzKWPb3ANy_-DFCNDY1tC8VFw&s">
+            <h3>Tomato</h3>
+            <p>₹40/kg</p>
+            <button onclick="addToCart('Tomato',40)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR6GgYwAhAvOCScxZZhAEuNf72aKaRynstPlnReeuhZJY7esy7CiLjrpkz9FPARJh2ewEsrdVRzZKz-jhGW9ZD71zqfja16sj-MpWlew&s=10">
+            <h3>Carrot</h3>
+            <p>₹50/kg</p>
+            <button onclick="addToCart('Carrot',50)">Add to Cart</button>
+        </div>
+
     </div>
-  </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT FARMERS -->
 <section class="about">
-  <h2>About Us</h2>
-  <p>
-    Our platform connects farmers directly with customers,
-    eliminating middlemen and ensuring fair pricing and fresh products.
-  </p>
+    <h2>👩‍🌾 About Our Farmers</h2>
+    <p>
+        Our farmers work day and night to bring fresh, organic produce directly to your table.
+        We support local farming communities and promote sustainable agriculture.
+    </p>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+    <h2>💬 What Customers Say</h2>
+
+    <div class="testimonial">
+        <p>"Best quality vegetables I’ve ever bought! Totally fresh."</p>
+        <h4>- Riya</h4>
+    </div>
+
+    <div class="testimonial">
+        <p>"Affordable and healthy food. Highly recommended!"</p>
+        <h4>- Aman</h4>
+    </div>
+
 </section>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <p>© 2026 Farmer Store | DevOps Project</p>
+<footer>
+    <p>© 2026 Farmer Market | 🌿 Eat Healthy, Live Better</p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
