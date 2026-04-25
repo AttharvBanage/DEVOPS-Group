@@ -1,197 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart - Farmer Store</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-    }
-
-    /* HEADER */
-    .header {
-      background: #2e7d32;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header h1 {
-      margin: 0;
-    }
-
-    .header nav a {
-      color: white;
-      margin-left: 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .header nav a:hover {
-      text-decoration: underline;
-    }
-
-    /* CART SECTION */
-    .cart-section {
-      padding: 30px;
-      text-align: center;
-    }
-
-    .cart-section h2 {
-      margin-bottom: 20px;
-    }
-
-    .cart-box {
-      background: white;
-      padding: 20px;
-      max-width: 700px;
-      margin: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    #cartItems {
-      text-align: left;
-      margin-bottom: 20px;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #ddd;
-      padding: 10px 0;
-    }
-
-    .total {
-      font-size: 20px;
-      font-weight: bold;
-      text-align: right;
-      color: #2e7d32;
-    }
-
-    /* BUTTON */
-    .cart-actions {
-      margin-top: 20px;
-    }
-
-    .cart-actions button {
-      background: #ff9800;
-      border: none;
-      padding: 12px 25px;
-      font-size: 16px;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .cart-actions button:hover {
-      background: #e68900;
-    }
-
-    /* FOOTER */
-    .footer {
-      text-align: center;
-      padding: 15px;
-      background: #333;
-      color: white;
-      margin-top: 40px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Cart</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <h1>🛒 Farmer Store</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="cart.html">Cart</a>
-  </nav>
+<header>
+    <h2>🌾 Farmer Market</h2>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
 </header>
 
-<!-- CART SECTION -->
-<section class="cart-section">
+<h2 class="title">🛒 Your Cart</h2>
 
-  <h2>Your Selected Items</h2>
+<div id="cart-items" class="cart-container"></div>
 
-  <div class="cart-box">
-    <div id="cartItems"></div>
-    <div class="total" id="totalPrice">Total: ₹0</div>
-  </div>
+<div class="cart-summary">
+    <h3 id="total">Total: ₹0</h3>
+    <button onclick="checkout()" class="btn">Checkout</button>
+</div>
 
-  <!-- ACTION BUTTON -->
-  <div class="cart-actions">
-    <button onclick="checkout()">Proceed to Checkout</button>
-  </div>
+<!-- SUCCESS BOX -->
+<div id="success-box" class="success-box">
+    <h2>✅ Order Placed Successfully!</h2>
+    <p>Thank you for supporting farmers 🌿</p>
+</div>
 
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <p>© 2026 Farmer Store | DevOps Project</p>
-</footer>
-
-<!-- SCRIPT -->
-<script>
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  function displayCart() {
-    let cartItemsDiv = document.getElementById("cartItems");
-    let totalPriceDiv = document.getElementById("totalPrice");
-
-    cartItemsDiv.innerHTML = "";
-    let total = 0;
-
-    if (cart.length === 0) {
-      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-      totalPriceDiv.innerHTML = "Total: ₹0";
-      return;
-    }
-
-    cart.forEach((item, index) => {
-      total += item.price;
-
-      cartItemsDiv.innerHTML += `
-        <div class="cart-item">
-          <span>${item.name} - ₹${item.price}</span>
-          <button onclick="removeItem(${index})">❌</button>
-        </div>
-      `;
-    });
-
-    totalPriceDiv.innerHTML = "Total: ₹" + total;
-  }
-
-  function removeItem(index) {
-    cart.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    displayCart();
-  }
-
-  function checkout() {
-    if (cart.length === 0) {
-      alert("Cart is empty!");
-      return;
-    }
-
-    alert("Order placed successfully! 🎉");
-    localStorage.removeItem("cart");
-    displayCart();
-  }
-
-  displayCart();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
