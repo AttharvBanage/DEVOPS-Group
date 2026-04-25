@@ -1,84 +1,91 @@
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// ADD TO CART WITH QUANTITY
 function addToCart(name, price) {
-  let existingItem = cart.find(item => item.name === name);
-
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push({ name, price, quantity: 1 });
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(name + " added to cart!");
+    cart.push({name, price});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Added to cart!");
+    updateCartCount();
 }
 
-// DISPLAY CART
+function updateCartCount() {
+    let count = cart.length;
+    let elements = document.querySelectorAll("#cart-count");
+    elements.forEach(el => el.innerText = count);
+}
+
 function loadCart() {
-  let cartDiv = document.getElementById("cartItems");
-  let totalDiv = document.getElementById("totalPrice");
+    let cartDiv = document.getElementById("cart-items");
+    let total = 0;
 
-  if (!cartDiv) return;
+    if (!cartDiv) return;
 
-  cartDiv.innerHTML = "";
-  let total = 0;
+    cartDiv.innerHTML = "";
 
-  if (cart.length === 0) {
-    cartDiv.innerHTML = "<p>Your cart is empty</p>";
-    totalDiv.innerHTML = "";
-    return;
-  }
+    cart.forEach((item, index) => {
+        total += item.price;
 
-  cart.forEach((item, index) => {
-    let div = document.createElement("div");
+        cartDiv.innerHTML += `
+            <div>
+                ${item.name} - ₹${item.price}
+                <button onclick="removeItem(${index})">Remove</button>
+            </div>
+        `;
+    });
 
-    div.innerHTML = `
-      ${item.name} - ₹${item.price} × ${item.quantity}
-      <button onclick="increaseQty(${index})">+</button>
-      <button onclick="decreaseQty(${index})">-</button>
-      <button onclick="removeItem(${index})">Remove</button>
-    `;
-
-    cartDiv.appendChild(div);
-
-    total += item.price * item.quantity;
-  });
-
-  totalDiv.innerHTML = "Total: ₹" + total;
+    document.getElementById("total").innerText = "Total: ₹" + total;
 }
 
-// INCREASE
-function increaseQty(index) {
-  cart[index].quantity += 1;
-  localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
-}
-
-// DECREASE
-function decreaseQty(index) {
-  if (cart[index].quantity > 1) {
-    cart[index].quantity -= 1;
-  } else {
-    cart.splice(index, 1);
-  }
-  localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
-}
-
-// REMOVE
 function removeItem(index) {
-  cart.splice(index, 1);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  loadCart();
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+    updateCartCount();
 }
 
-// CHECKOUT
 function checkout() {
-  alert("Order placed successfully!");
-  localStorage.removeItem("cart");
-  location.reload();
+    alert("Order placed successfully!");
+    localStorage.removeItem("cart");
+    location.reload();
 }
 
-// LOAD ON PAGE
-window.onload = loadCart;
+updateCartCount();
+loadCart();
+
+function loadCart() {
+    let cartDiv = document.getElementById("cart-items");
+    let total = 0;
+
+    if (!cartDiv) return;
+
+    cartDiv.innerHTML = "";
+
+    cart.forEach((item, index) => {
+        total += item.price;
+
+        cartDiv.innerHTML += `
+        <div class="cart-item">
+            <span>${item.name} - ₹${item.price}</span>
+            <div>
+                <button onclick="removeItem(${index})">❌</button>
+            </div>
+        </div>
+        `;
+    });
+
+    document.getElementById("total").innerText = "Total: ₹" + total;
+}
+
+function checkout() {
+    if(cart.length === 0){
+        alert("Cart is empty!");
+        return;
+    }
+
+    document.getElementById("success-box").style.display = "block";
+
+    localStorage.removeItem("cart");
+    cart = [];
+
+    loadCart();
+    updateCartCount();
+}
